@@ -1,0 +1,30 @@
+/**
+ * @param {Object|Array} obj
+ * @return {Object|Array}
+ */
+var compactObject = function(obj) {
+    if(!Boolean(obj)){
+        return undefined
+    }
+
+    if(typeof obj !== "object"){
+        return obj
+    }
+
+    if(Array.isArray(obj)){
+        return obj
+        .map((item) => compactObject(item))
+        .filter((item) => item !== undefined)
+    }
+
+    const output = {}
+    for(const key in obj){
+      const item = obj[key]
+     const result = compactObject(item)
+
+     if(result != undefined){
+        output[key] = result
+     }
+    }
+    return output
+};
